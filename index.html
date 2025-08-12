@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfólio - Lucas Sperb</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <h1>Lucas Sperb</h1>
+      <ul>
+        <li><a href="#sobre" id="cabLinks">Sobre</a></li>
+        <li><a href="#projetos" id="cabLinks">Projetos</a></li>
+        <li><a href="#contato" id="cabLinks">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2 id="h2">Desenvolvedor Front-End Júnior</h2>
+      <p>Transformando ideias em interfaces bonitas e funcionais.</p>
+      <button class="btn" id="verProjetos" onclick="document.getElementById('projetos').scrollIntoView({behavior:'smooth'})">Ver Projetos</button>
+    </div>
+  </section>
+
+  <section id="sobre" class="container">
+    <h2>Sobre mim</h2>
+    <p>Sou desenvolvedor front-end com conhecimento em HTML, CSS, JavaScript e um pouco de React. Apaixonado por criar experiências digitais modernas e responsivas.</p>
+  </section>
+
+  <section id="projetos" class="container">
+    <h2>Projetos</h2>
+    <div id="projetosWrapper" class="projetos-wrapper">
+      <div class="projetos-grid" id="projetosGrid">
+        <!-- Projetos serão adicionados aqui pelo JS -->
+      </div>
+    </div>
+    <div id="alignButton">
+        <button id="btnVerMais" class="btn">Ver Mais</button>
+    </div>
+  </section>
+
+  <section id="contato" class="container">
+    <h2>Contato</h2>
+    <p>Email: <a href="mailto:lucas305.sperb@gmail.com">lucas305.sperb@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/lucas-sperb-779a5a243/" target="_blank">linkedin.com/in/lucasSperb</a></p>
+    <p>GitHub: <a href="https://github.com/lucasSperb" target="_blank">github.com/lucasSperb</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Lucas Sperb - Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>
