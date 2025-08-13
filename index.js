@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       titulo: "Jogo Número Secreto",
       descricao: "Jogo interativo em JavaScript onde o usuário tenta adivinhar um número secreto entre 1 e 100 usando comandos de voz pelo microfone. O sistema dá dicas se o número é maior ou menor até acertar.",
       imagem: "images/numeroSecreto.png",
-      linkProjeto: "https://vercel.com/lucas-projects-6ff942f3/jogo-numero-secreto",
+      linkProjeto: "https://jogo-numero-secreto-one-blond.vercel.app/",
       linkCodigo: "https://github.com/lucasSperb/jogo-numero-secreto"
     },
     {
