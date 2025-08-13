@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
-      <img src="${proj.imagem}" alt="${proj.titulo}" width="500" height="252" />
+      <img src="${proj.imagem}" alt="${proj.titulo}" />
       <h3>${proj.titulo}</h3>
-      <p id="descricao">${proj.descricao}</p>
+      <p class="descricao">${proj.descricao}</p>
       <a href="${proj.linkProjeto}" target="_blank">Ver projeto</a> |
       <a href="${proj.linkCodigo}" target="_blank">Código no GitHub</a>
     `;
@@ -60,39 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
   btnToggle.addEventListener('click', () => {
     if (!expanded) {
       renderProjects(projetos.length);
-      const cardsCount = projetos.length;
-      const rows = Math.ceil(cardsCount / 2);
-      const cardHeight = 320;
-      const totalHeight = rows * cardHeight;
-
-      projetosWrapper.offsetHeight; 
-      
-      projetosWrapper.style.maxHeight = totalHeight + 'px';
+      projetosWrapper.style.maxHeight = projetosWrapper.scrollHeight + 'px';
       projetosWrapper.style.opacity = '1';
-
       btnToggle.textContent = 'Mostrar Menos';
       expanded = true;
-
     } else {
       projetosWrapper.style.opacity = '0';
-
-      function onTransitionEnd(event) {
+      projetosWrapper.addEventListener('transitionend', function onTransitionEnd(event) {
         if (event.propertyName === 'opacity') {
           projetosWrapper.removeEventListener('transitionend', onTransitionEnd);
-
           renderProjects(visibleCount);
           projetosWrapper.style.maxHeight = '600px';
-
-          projetosWrapper.offsetHeight;
-
           projetosWrapper.style.opacity = '1';
-
           btnToggle.textContent = 'Ver Mais';
           expanded = false;
         }
-      }
-
-      projetosWrapper.addEventListener('transitionend', onTransitionEnd);
+      });
     }
   });
 
