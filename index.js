@@ -19,18 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
       linkCodigo: "https://github.com/lucasSperb/jogo-numero-secreto"
     },
     {
-      titulo: "Projeto 3",
-      descricao: "Descrição do projeto 3.",
-      imagem: "images/projeto3.png",
-      linkProjeto: "#",
-      linkCodigo: "#"
-    },
-    {
-      titulo: "Projeto 4",
-      descricao: "Descrição do projeto 4.",
-      imagem: "images/projeto4.png",
-      linkProjeto: "#",
-      linkCodigo: "#"
+      titulo: "Dashboard Financeiro",
+      descricao: "Aplicação web desenvolvida em HTML, CSS e JavaScript para organização e visualização de finanças pessoais. Permite cadastrar transações, exibir gráficos interativos e acompanhar o equilíbrio entre receitas e despesas de forma simples e intuitiva.",
+      imagem: "images/dashboardFinanceiro.png",
+      linkProjeto: "https://dashboard-financeiro-liard.vercel.app/",
+      linkCodigo: "https://github.com/lucasSperb/dashboard-financeiro"
     }
   ];
 
@@ -60,22 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
   btnToggle.addEventListener('click', () => {
     if (!expanded) {
       renderProjects(projetos.length);
-      projetosWrapper.style.maxHeight = projetosWrapper.scrollHeight + 'px';
-      projetosWrapper.style.opacity = '1';
+      requestAnimationFrame(() => {
+        projetosWrapper.style.maxHeight = projetosWrapper.scrollHeight + 'px';
+        projetosWrapper.style.opacity = '1';
+      });
       btnToggle.textContent = 'Mostrar Menos';
       expanded = true;
     } else {
-      projetosWrapper.style.opacity = '0';
-      projetosWrapper.addEventListener('transitionend', function onTransitionEnd(event) {
-        if (event.propertyName === 'opacity') {
-          projetosWrapper.removeEventListener('transitionend', onTransitionEnd);
-          renderProjects(visibleCount);
-          projetosWrapper.style.maxHeight = '600px';
-          projetosWrapper.style.opacity = '1';
-          btnToggle.textContent = 'Ver Mais';
-          expanded = false;
-        }
-      });
+      projetosWrapper.style.maxHeight = '600px';
+      renderProjects(visibleCount);
+      btnToggle.textContent = 'Ver Mais';
+      expanded = false;
     }
   });
 
