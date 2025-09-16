@@ -114,6 +114,11 @@ h2 {
   transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
+#projetosWrapper {
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
 .projetos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

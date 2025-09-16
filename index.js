@@ -5,36 +5,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const projetos = [
     {
-      titulo: "To Do List",
-      descricao: "Lista de tarefas criada em React, com adição e remoção de itens, focada em prática de hooks e componentes.",
-      imagem: "images/toDoList.png",
-      linkProjeto: "https://to-do-list-alpha-khaki-28.vercel.app/",
-      linkCodigo: "https://github.com/lucasSperb/toDoList"
-    },
-    {
-      titulo: "Jogo Número Secreto",
-      descricao: "Jogo interativo em JavaScript onde o usuário tenta adivinhar um número secreto entre 1 e 100 usando comandos de voz pelo microfone. O sistema dá dicas se o número é maior ou menor até acertar.",
-      imagem: "images/numeroSecreto.png",
-      linkProjeto: "https://jogo-numero-secreto-one-blond.vercel.app/",
-      linkCodigo: "https://github.com/lucasSperb/jogo-numero-secreto"
+      titulo: "Lista de Tarefas",
+      descricao: "Aplicação web desenvolvida com React.js e Vite para gerenciar tarefas diárias. Permite adicionar, editar, marcar como concluídas e remover tarefas de forma prática.",
+      imagem: "images/listaTarefasReact.png",
+      linkProjeto: "https://lista-tarefas-react-eight.vercel.app/",
+      linkCodigo: "https://github.com/lucasSperb/lista-tarefas-react"
     },
     {
       titulo: "Dashboard Financeiro",
-      descricao: "Aplicação web desenvolvida em HTML, CSS e JavaScript para organização e visualização de finanças pessoais. Permite cadastrar transações, exibir gráficos interativos e acompanhar o equilíbrio entre receitas e despesas de forma simples e intuitiva.",
+      descricao: "Aplicação web em HTML, CSS e JavaScript para controle de finanças pessoais. Permite cadastrar receitas e despesas, gerar gráficos interativos e visualizar o saldo de forma intuitiva.",
       imagem: "images/dashboardFinanceiro.png",
       linkProjeto: "https://dashboard-financeiro-liard.vercel.app/",
       linkCodigo: "https://github.com/lucasSperb/dashboard-financeiro"
+    },
+    {
+      titulo: "Jogo Número Secreto",
+      descricao: "Jogo interativo em JavaScript onde o usuário tenta adivinhar um número secreto entre 1 e 100 usando comandos de voz. O sistema fornece dicas se o número é maior ou menor até o acerto.",
+      imagem: "images/numeroSecreto.png",
+      linkProjeto: "https://jogo-numero-secreto-one-blond.vercel.app/",
+      linkCodigo: "https://github.com/lucasSperb/jogo-numero-secreto"
     }
   ];
 
   const visibleCount = 2;
   let expanded = false;
 
+  projetosWrapper.style.transition = 'max-height 0.5s ease';
+
   function renderProjects(count) {
     projetosGrid.innerHTML = '';
-    for (let i = 0; i < count; i++) {
+    const limit = Math.min(count, projetos.length);
+    for (let i = 0; i < limit; i++) {
       projetosGrid.appendChild(createCard(projetos[i]));
     }
+
+    setTimeout(() => {
+      const totalHeight = projetosGrid.scrollHeight;
+      projetosWrapper.style.maxHeight = totalHeight + 'px';
+    }, 50);
   }
 
   function createCard(proj) {
@@ -53,21 +61,17 @@ document.addEventListener('DOMContentLoaded', () => {
   btnToggle.addEventListener('click', () => {
     if (!expanded) {
       renderProjects(projetos.length);
-      requestAnimationFrame(() => {
-        projetosWrapper.style.maxHeight = projetosWrapper.scrollHeight + 'px';
-        projetosWrapper.style.opacity = '1';
-      });
       btnToggle.textContent = 'Mostrar Menos';
-      expanded = true;
     } else {
-      projetosWrapper.style.maxHeight = '600px';
       renderProjects(visibleCount);
       btnToggle.textContent = 'Ver Mais';
-      expanded = false;
     }
+    expanded = !expanded;
   });
 
   renderProjects(visibleCount);
-  projetosWrapper.style.maxHeight = '600px';
-  projetosWrapper.style.opacity = '1';
+
+  if (projetos.length <= visibleCount) {
+    btnToggle.style.display = 'none';
+  }
 });
