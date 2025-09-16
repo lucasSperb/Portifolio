@@ -32,19 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   projetosWrapper.style.transition = 'max-height 0.5s ease';
 
-  function renderProjects(count) {
-    projetosGrid.innerHTML = '';
-    const limit = Math.min(count, projetos.length);
-    for (let i = 0; i < limit; i++) {
-      projetosGrid.appendChild(createCard(projetos[i]));
-    }
-
-    setTimeout(() => {
-      const totalHeight = projetosGrid.scrollHeight;
-      projetosWrapper.style.maxHeight = totalHeight + 'px';
-    }, 50);
-  }
-
   function createCard(proj) {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -56,6 +43,28 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="${proj.linkCodigo}" target="_blank">Código no GitHub</a>
     `;
     return card;
+  }
+
+  function adjustMaxHeight() {
+    const imagens = projetosGrid.querySelectorAll('img');
+    const promises = Array.from(imagens).map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(resolve => img.onload = resolve);
+    });
+
+    Promise.all(promises).then(() => {
+      projetosWrapper.style.maxHeight = projetosGrid.scrollHeight + 'px';
+    });
+  }
+
+  function renderProjects(count) {
+    projetosGrid.innerHTML = '';
+    const limit = Math.min(count, projetos.length);
+    for (let i = 0; i < limit; i++) {
+      projetosGrid.appendChild(createCard(projetos[i]));
+    }
+
+    adjustMaxHeight();
   }
 
   btnToggle.addEventListener('click', () => {
